@@ -1,3 +1,4 @@
+```
 section .data
         x DD 4          ;predef number, factorial should be 24
 
@@ -23,6 +24,7 @@ factorial:
         inc ecx
         cmp ecx,0       ;compares ecx to 0
         jne notfactorial
+```
 
         mov eax,1
         int 0x80
