@@ -1,0 +1,55 @@
+;my code will create a factorial with x=4 
+
+section .data
+        x DD 4          ; Predefined number, factorial of 4 should be 24
+        ;res DD 1
+
+section .text
+    global _start
+
+_start:
+        mov eax, [x]            ; initial val 4 into eax
+        mov ebx, eax            ; use for counter
+        mov ecx, res            ; for multiplication
+
+factorial_counterloop:
+        cmp ebx, 1
+        je finish
+
+        mov eax, [res]
+        mul ebx                 ;multiply eax by ebx
+        mov [res], eax
+        dec ebx
+        call output
+        call newline
+        jmp factorial_counterloop    ;loop back
+
+newline:
+        mov eax, 10
+        mov [res], eax
+        mov ecx, res
+        mov eax, 4
+        mov ebx, 1
+        mov edx, 1
+        int 0x80
+        ret
+
+finish:
+        mov eax, res
+        ;call output
+        call exit
+
+output:
+        mov eax, 4
+        mov ebx, 1
+        mov edx, 1
+        int 0x80
+        ret
+
+exit:
+        ;exit the program
+        mov eax, 1
+        int 0x80
+
+segment .bss
+        res resb 1
